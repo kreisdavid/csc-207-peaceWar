@@ -17,7 +17,7 @@ public class PeaceWarGame {
 		this.numRounds = numRounds;
 		this.p1Score = 0;
 		this.p2Score = 0;
-		
+		this.rand = new Random();
 		//need to implement rand
 	}
 
@@ -97,7 +97,7 @@ public class PeaceWarGame {
 		} else {
 			System.out.println(">>> It's a tie! <<<");
 		}
-		
+		System.out.println(""); //for looks
 	}//main
 
 
