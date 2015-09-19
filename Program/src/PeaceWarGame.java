@@ -68,23 +68,31 @@ public class PeaceWarGame {
 		if(args.length != 2){
 			System.out.println("Usage: PeaceWarGame <#/rounds> <ai|player>");
 			System.exit(0);
-		}
+		}//args check
+		if(!args[1].equalsIgnoreCase("ai") && !args[1].equalsIgnoreCase("player")){
+			System.out.println("Usage: PeaceWarGame <#/rounds> <ai|player>");
+			System.exit(0);
+		}//args[1] check
+		
+		PeaceWarGame game;
 		if(args[1].equalsIgnoreCase("ai")){
 			Player p1 = new RandomPlayer("Bot 1");
 			Player p2 = new RandomPlayer("Bot 2");
-			PeaceWarGame game = new PeaceWarGame(p1, p2, Integer.parseInt(args[0]));
-		} else if(args[1].equalsIgnoreCase("player")){
+			game = new PeaceWarGame(p1, p2, Integer.parseInt(args[0]));
+		} else {
 			Player p1 = new HumanPlayer("Human");
 			Player p2 = new RandomPlayer("Bot");
-			PeaceWarGame game = new PeaceWarGame(p1, p2, Integer.parseInt(args[0]));
+			game = new PeaceWarGame(p1, p2, Integer.parseInt(args[0]));
 		}//else
 		
+		game.play();
+		
 		System.out.println("Final");
-		System.out.println("Player 1: " + game.getPlayer1Score();
+		System.out.println("Player 1: " + game.getPlayer1Score());
 		System.out.println("Player 2: " + game.getPlayer2Score());
-		if(this.p1Score > this.p2Score){
+		if(game.getPlayer1Score() > game.getPlayer2Score()){
 			System.out.println(">>> Player 1 wins! <<<");
-		} else if(this.p2Score > this.p1Score){
+		} else if(game.getPlayer2Score() > game.getPlayer1Score()){
 			System.out.println(">>> Player 2 wins! <<<");
 		} else {
 			System.out.println(">>> It's a tie! <<<");

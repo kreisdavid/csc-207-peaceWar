@@ -6,11 +6,13 @@ public class HumanPlayer implements Player {
 	private String name;
 	private String strategy;
 	private Scanner read;
+	private String choice;
 	
 	public HumanPlayer(String name){
 		this.name = name;
 		this.strategy = "Human intuition.";
 		this.read = new Scanner(System.in);
+		this.choice = null;
 	}
 	
 	@Override
@@ -28,10 +30,17 @@ public class HumanPlayer implements Player {
 	@Override
 	public Move takeTurn(int num, Random rand) {
 		// TODO Auto-generated method stub
-		
+		this.choice = null;
 		//need to prompt here
-		
-		return null;
+		while(!choice.equalsIgnoreCase("war") && !choice.equalsIgnoreCase("peace")){
+			System.out.println("Strategy? ");
+			choice = read.next();
+		}
+		if(choice.equalsIgnoreCase("war")){
+			return Move.WAR;
+		} else {
+			return Move.PEACE;
+		}
 	}
 	
 	@Override
