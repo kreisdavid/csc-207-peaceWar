@@ -27,6 +27,8 @@ public class PeaceWarGame {
 			System.out.println("Year " + (i + 1));
 			this.p1Move = this.player1.takeTurn(i+1, rand);
 			this.p2Move = this.player2.takeTurn(i+1, rand);
+			this.player1.recordOpponentMove(i+1, this.p2Move);
+			this.player2.recordOpponentMove(i+1, this.p1Move);
 			System.out.println("Player 1 chose " + this.p1Move.toString());
 			System.out.println("Player 2 chose " + this.p2Move.toString());
 			
@@ -69,7 +71,7 @@ public class PeaceWarGame {
 			System.out.println("Usage: PeaceWarGame <#/rounds> <ai|player>");
 			System.exit(0);
 		}//args check
-		if(!args[1].equalsIgnoreCase("ai") && !args[1].equalsIgnoreCase("player")){
+		if(!args[1].equalsIgnoreCase("ai") && !args[1].equalsIgnoreCase("player") && !args[1].equalsIgnoreCase("watermelon")){//remember to take out watermelon
 			System.out.println("Usage: PeaceWarGame <#/rounds> <ai|player>");
 			System.exit(0);
 		}//args[1] check
@@ -79,7 +81,18 @@ public class PeaceWarGame {
 			Player p1 = new RandomPlayer("Bot 1");
 			Player p2 = new RandomPlayer("Bot 2");
 			game = new PeaceWarGame(p1, p2, Integer.parseInt(args[0]));
-		} else {
+		} 
+		
+		//just for testing
+		else if(args[1].equalsIgnoreCase("watermelon")){
+			Player p1 = new Watermelon();
+			Player p2 = new HumanPlayer("Human");
+			game = new PeaceWarGame(p1, p2, Integer.parseInt(args[0]));
+		}
+		
+		//end of testing
+		
+		else {
 			Player p1 = new HumanPlayer("Human");
 			Player p2 = new RandomPlayer("Bot");
 			game = new PeaceWarGame(p1, p2, Integer.parseInt(args[0]));
