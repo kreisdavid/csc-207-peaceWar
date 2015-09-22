@@ -3,15 +3,46 @@ import java.util.Random;
 
 public class Watermelon implements Player {
 	
+	/**
+	 * Watermelon is a bot that plays the PeaceWarGame. It is designed to recognize the strategy
+	 * of its opponent (current implementation includes only the most likely scenarios) and to then
+	 * play the optimal strategy against that opponent to maximize the points scored for Watermelon.
+	 * 
+	 * Watermelon begins the game with a predetermined pattern of moves, set so that each of the strategies
+	 * it is designed to detect will produce a different pattern of moves in response, thus making them 
+	 * distinguishable. If Watermelon is able to determine the opponent's strategy, it plays the appropriate
+	 * strategy that will result in the maximum number of points for itself. If Watermelon is unable to 
+	 * determine its opponent's strategy, it will utilize the Tit for Tat strategy. 
+	 * 
+	 * Watermelon is currently programed to detect the following strategies:
+	 * Tit for Tat
+	 * Tit for Two Tats
+	 * Suspicious Tit for Tat
+	 * Pavlov
+	 * Grudger
+	 * Always Peace
+	 * Always War
+	 * True Peace Maker
+	 * 
+	 * Research on www.iterated-prisoners-dilemma.net was the source for knowledge of the different common
+	 * strategies. 
+	 * 
+	 * Watermelon has 4 strategies that it may use after the initial set sequence of moves:
+	 * Always War
+	 * Always Peace
+	 * Alternating Peace and War
+	 * Tit for Tat
+	 */
+	
 	private String name;
 	private String strategy;
-	private Move[] probe;
-	private Move[] react;
+	private Move[] probe; //to hold initial results from set pattern
+	private Move[] react; //used if opponent strategy cannot be determined
 	private int bestStrategy;
 	
 	public Watermelon(){
 		this.name = "Watermelon";
-		this.strategy = "lol, like i would post my strategy on my public github";
+		this.strategy = "Starts with a set pattern in order to determine the opponent's strategy, then plays optimally for discovered strategy.";
 		this.probe = new Move[9];
 		this.react = new Move[1];
 	}
@@ -31,6 +62,8 @@ public class Watermelon implements Player {
 	@Override
 	public Move takeTurn(int num, Random rand) {
 		// TODO Auto-generated method stub
+		//the first 9 moves are predetermined to act as a test for the opponent strategy
+		//the rest of the moves are based on what the strategy of the opponent has been determined to be
 		if(num == 1){
 			return Move.WAR;
 		} else if(num == 2){
@@ -87,41 +120,41 @@ public class Watermelon implements Player {
 					&& this.probe[3].equals(Move.PEACE) && this.probe[4].equals(Move.PEACE) && this.probe[5].equals(Move.WAR)
 					&& this.probe[6].equals(Move.PEACE) && this.probe[7].equals(Move.WAR)&& this.probe[8].equals(Move.WAR)){
 				this.bestStrategy = 1;
-				//t4t
+				//determine if t4t
 			} else if(this.probe[0].equals(Move.PEACE) && this.probe[1].equals(Move.PEACE) && this.probe[2].equals(Move.WAR) 
 					&& this.probe[3].equals(Move.WAR) && this.probe[4].equals(Move.PEACE) && this.probe[5].equals(Move.PEACE)
 					&& this.probe[6].equals(Move.PEACE) && this.probe[7].equals(Move.PEACE)&& this.probe[8].equals(Move.WAR)){
 				this.bestStrategy = 3;
-				//t42t
+				//determine if t42t
 			} else if(this.probe[0].equals(Move.WAR) && this.probe[1].equals(Move.WAR) && this.probe[2].equals(Move.WAR) 
 					&& this.probe[3].equals(Move.PEACE) && this.probe[4].equals(Move.PEACE) && this.probe[5].equals(Move.WAR)
 					&& this.probe[6].equals(Move.PEACE) && this.probe[7].equals(Move.WAR)&& this.probe[8].equals(Move.WAR)){
 				this.bestStrategy = 1;
-				//st4t
+				//determine if st4t
 			} else if(this.probe[0].equals(Move.PEACE) && this.probe[1].equals(Move.WAR) && this.probe[2].equals(Move.PEACE) 
 					&& this.probe[3].equals(Move.PEACE) && this.probe[4].equals(Move.PEACE) && this.probe[5].equals(Move.WAR)
 					&& this.probe[6].equals(Move.WAR) && this.probe[7].equals(Move.PEACE)&& this.probe[8].equals(Move.WAR)){
 				this.bestStrategy = 2;
-				//pavlov
+				//determine if pavlov
 			} else if(this.probe[0].equals(Move.PEACE) && this.probe[1].equals(Move.WAR) && this.probe[2].equals(Move.WAR) 
 					&& this.probe[3].equals(Move.WAR) && this.probe[4].equals(Move.WAR) && this.probe[5].equals(Move.WAR)
 					&& this.probe[6].equals(Move.WAR) && this.probe[7].equals(Move.WAR)&& this.probe[8].equals(Move.WAR)){
 				this.bestStrategy = 2;
-				//grudger
+				//determine if grudger
 			} else if(this.probe[0].equals(Move.PEACE) && this.probe[1].equals(Move.PEACE) && this.probe[2].equals(Move.PEACE) 
 					&& this.probe[3].equals(Move.PEACE) && this.probe[4].equals(Move.PEACE) && this.probe[5].equals(Move.PEACE)
 					&& this.probe[6].equals(Move.PEACE) && this.probe[7].equals(Move.PEACE)&& this.probe[8].equals(Move.PEACE)){
 				this.bestStrategy = 2;
-				//always peace
+				//determine if always peace
 			} else if(this.probe[0].equals(Move.WAR) && this.probe[1].equals(Move.WAR) && this.probe[2].equals(Move.WAR) 
 					&& this.probe[3].equals(Move.WAR) && this.probe[4].equals(Move.WAR) && this.probe[5].equals(Move.WAR)
 					&& this.probe[6].equals(Move.WAR) && this.probe[7].equals(Move.WAR)&& this.probe[8].equals(Move.WAR)){
 				this.bestStrategy = 2;
-				//always war
+				//determine if always war
 			} else if(this.probe[0].equals(Move.PEACE) && this.probe[1].equals(Move.PEACE) && this.probe[3].equals(Move.PEACE) 
 					&& this.probe[4].equals(Move.PEACE) && this.probe[5].equals(Move.PEACE) && this.probe[6].equals(Move.PEACE) 
 					&& this.probe[7].equals(Move.PEACE)){
-				//to test for tpm
+				//determine if tpm
 				if(this.probe[2].equals(Move.WAR) || this.probe[8].equals(Move.WAR)){
 					this.bestStrategy = 3;
 					//probable that its tpm, random variation makes it likely but not certain

@@ -18,7 +18,6 @@ public class PeaceWarGame {
 		this.p1Score = 0;
 		this.p2Score = 0;
 		this.rand = new Random();
-		//need to implement rand
 	}
 
 	public void play(){
@@ -83,7 +82,7 @@ public class PeaceWarGame {
 			game = new PeaceWarGame(p1, p2, Integer.parseInt(args[0]));
 		} 
 		
-		//just for testing
+		//just for testing my bot for tournament
 		else if(args[1].equalsIgnoreCase("watermelon")){
 			Player p1 = new Watermelon();
 			Player p2 = new HumanPlayer("Human");

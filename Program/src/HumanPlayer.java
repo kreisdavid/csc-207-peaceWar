@@ -31,7 +31,7 @@ public class HumanPlayer implements Player {
 	public Move takeTurn(int num, Random rand) {
 		// TODO Auto-generated method stub
 		this.choice = "";
-		//need to prompt here
+		//prompt for user strategy
 		while(!choice.equalsIgnoreCase("war") && !choice.equalsIgnoreCase("peace")){
 			System.out.print("Strategy? ");
 			choice = read.next();

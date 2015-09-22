@@ -32,6 +32,7 @@ public class RandomPlayer implements Player {
 		} else {
 			return Move.PEACE;
 		}
+		//randomly choose WAR or PEACE
 	}
 	
 	@Override
