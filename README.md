@@ -38,3 +38,37 @@ Homework
                  RandomPlayer.java
                  HumanPlayer.java
                  Watermelon.java
+                 
+                 
+                 
+                 
+ 	/**
+	 * Watermelon is a bot that plays the PeaceWarGame. It is designed to recognize the strategy
+	 * of its opponent (current implementation includes only the most likely scenarios) and to then
+	 * play the optimal strategy against that opponent to maximize the points scored for Watermelon.
+	 * 
+	 * Watermelon begins the game with a predetermined pattern of moves, set so that each of the strategies
+	 * it is designed to detect will produce a different pattern of moves in response, thus making them 
+	 * distinguishable. If Watermelon is able to determine the opponent's strategy, it plays the appropriate
+	 * strategy that will result in the maximum number of points for itself. If Watermelon is unable to 
+	 * determine its opponent's strategy, it will utilize the Tit for Tat strategy. 
+	 * 
+	 * Watermelon is currently programed to detect the following strategies:
+	 * Tit for Tat
+	 * Tit for Two Tats
+	 * Suspicious Tit for Tat
+	 * Pavlov
+	 * Grudger
+	 * Always Peace
+	 * Always War
+	 * True Peace Maker
+	 * 
+	 * Research on www.iterated-prisoners-dilemma.net was the source for knowledge of the different common
+	 * strategies. 
+	 * 
+	 * Watermelon has 4 strategies that it may use after the initial set sequence of moves:
+	 * Always War
+	 * Always Peace
+	 * Alternating Peace and War
+	 * Tit for Tat
+	 */
